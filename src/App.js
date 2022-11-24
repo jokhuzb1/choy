@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-
+import NavbarMenu from "./components/NavBarMenu";
+import Sales from './pages/Sales';
+import Transactions from './pages/Transactions';
+import Products from './pages/Products';
+import {useEffect, useState} from 'react';
+import { Button } from "react-bootstrap";
+  
 function App() {
+  const [active, setActive] = useState('products');
+  const change = ()=>{
+    setActive("transactions")
+  }
+  const pages = {
+      sales:<Sales/>,
+      transactions:<Transactions/>,
+      products:<Products/>
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavbarMenu setActive={setActive}/>
+      {pages[active]}
     </div>
   );
 }
